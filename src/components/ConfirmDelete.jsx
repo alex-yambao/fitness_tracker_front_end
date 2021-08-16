@@ -9,6 +9,7 @@ const ConfirmDelete = ({
   routineId,
   setMyRoutinesList,
   myRoutinesList,
+  routineListIndex,
 }) => {
   const [deletionMessage, setDeletionMessage] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -24,15 +25,17 @@ const ConfirmDelete = ({
   }
 
   async function handleSubmit(e) {
+    e.preventDefault();
     setDeletionMessage(null);
     try {
       const result = await deleteRoutine(routineId);
-      setMyRoutinesList(myRoutinesList);
-      setDeletionMessage("Routine deleted successfully!");
+      if (result) {
+        myRoutinesList.splice(routineListIndex, 1);
+        setMyRoutinesList(myRoutinesList);
+        setDeletionMessage("Routine deleted successfully!");
+      }
     } catch (error) {
       setDeletionMessage("Routine deletion unsuccessful. Please try again");
-    } finally {
-      e.target.reset();
     }
   }
 

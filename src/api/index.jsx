@@ -58,7 +58,7 @@ export const getRoutines = async () => {
 };
 
 //GET /:username/routines
-export const getPublicRoutinesByUser = async (username) => {
+export const getAllRoutinesByUser = async (username) => {
   try {
     const response = await fetch(`${BASE_URL}/users/${username}/routines`, {
       headers: {
@@ -66,7 +66,6 @@ export const getPublicRoutinesByUser = async (username) => {
       },
     });
     const data = await response.json();
-
     return data;
   } catch (error) {
     throw error;

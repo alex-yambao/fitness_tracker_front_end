@@ -9,38 +9,13 @@ import {
 } from "react-router-dom";
 
 import { getCurrentUser } from "./auth";
-
+import { getActivities } from "./api";
 import { Header, Routines, MyRoutines, Activities } from "./components";
-
-import {
-  getActivities,
-  getAllPublicRoutines,
-  getPublicRoutinesByUser,
-} from "./api";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(getCurrentUser());
-  const [publicRoutines, setPublicRoutines] = useState([]);
-  const [myRoutinesList, setMyRoutinesList] = useState([]);
   const [activitiesList, setActivities] = useState([]);
-
   useEffect(() => {
-    if (currentUser) {
-      getPublicRoutinesByUser(currentUser.username)
-        .then((routines) => {
-          setMyRoutinesList(routines);
-        })
-        .catch((error) => console.error(error));
-    }
-
-    getAllPublicRoutines()
-      .then((routines) => {
-        setPublicRoutines(routines);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
     getActivities()
       .then((activities) => {
         setActivities(activities);
@@ -48,7 +23,7 @@ const App = () => {
       .catch((error) => {
         console.error(error);
       });
-  }, [currentUser]);
+  }, []);
 
   return (
     <Router>
@@ -60,17 +35,18 @@ const App = () => {
               <Route path="/MyRoutines">
                 <MyRoutines
                   currentUser={currentUser}
-                  myRoutinesList={myRoutinesList}
-                  setMyRoutinesList={setMyRoutinesList}
                   activitiesList={activitiesList}
                   setActivities={setActivities}
                 />
               </Route>
               <Route path="/Routines">
-                <Routines routines={publicRoutines} />
+                <Routines />
               </Route>
               <Route path="/activities">
-                <Activities activities={activitiesList} />
+                <Activities
+                  activitiesList={activitiesList}
+                  setActivities={setActivities}
+                />
               </Route>
               <Route exact path="/">
                 <h2 style={{ padding: ".5em" }}>
@@ -84,10 +60,10 @@ const App = () => {
           <>
             <Switch>
               <Route path="/Routines">
-                <Routines routines={publicRoutines} />
+                <Routines />
               </Route>
               <Route path="/activities">
-                <Activities activities={activitiesList} />
+                <Activities />
               </Route>
               <Route exact path="/">
                 <h2 style={{ padding: ".5em" }}>

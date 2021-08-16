@@ -29,11 +29,12 @@ const CreateRoutine = ({ handleClose, setMyRoutinesList, myRoutinesList }) => {
         goal: newRoutineGoal,
         isPublic: isPublic,
       });
-      myRoutinesList.push(result);
-      setMyRoutinesList(myRoutinesList);
+      setMyRoutinesList([...myRoutinesList], { result });
       setCreationMessage("Routine created successfully!");
     } catch (error) {
       setCreationMessage("Routine creation unsuccessful. Please try again");
+    } finally {
+      reset();
     }
   }
 

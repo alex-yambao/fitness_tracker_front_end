@@ -1,13 +1,27 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import "./Routines.css";
+import { getAllPublicRoutines } from "../api";
 
-const Routines = ({ routines }) => {
+const Routines = () => {
+  const [publicRoutines, setPublicRoutines] = useState([]);
+
+  useEffect(() => {
+    getAllPublicRoutines()
+      .then((routines) => {
+        setPublicRoutines(routines);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   return (
     <div className="Routines">
       <h2>Here are all public routines with their activities</h2>
-      <p>There is a total of {routines.length} public routines.</p>
+      <p>There is a total of {publicRoutines.length} public routines.</p>
 
-      {routines.map(({ id, name, goal, creatorName, activities }) => (
+      {publicRoutines.map(({ id, name, goal, creatorName, activities }) => (
         <div key={id} className="post">
           <h3>Routine Name: {name}</h3>
           <p>Routine Goal: {goal}</p>
