@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import "./Activities.css";
 
 const Activities = ({ activitiesList, setActivities }) => {

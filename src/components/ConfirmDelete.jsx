@@ -30,8 +30,9 @@ const ConfirmDelete = ({
     try {
       const result = await deleteRoutine(routineId);
       if (result) {
-        myRoutinesList.splice(routineListIndex, 1);
-        setMyRoutinesList(myRoutinesList);
+        setMyRoutinesList(
+          myRoutinesList.filter((task) => task.id !== routineId)
+        );
         setDeletionMessage("Routine deleted successfully!");
       }
     } catch (error) {

@@ -8,6 +8,7 @@ const AddActivity = ({ routineId, activitiesList }) => {
   const [count, setCount] = useState("");
   const [duration, setDuration] = useState("");
 
+
   async function handleSubmit(e) {
     e.preventDefault();
     try {
@@ -15,8 +16,9 @@ const AddActivity = ({ routineId, activitiesList }) => {
         routineId,
         activityId,
         duration,
-        count
+        count,
       );
+      console.log(result)
     } catch (error) {
       console.error(error);
     }
@@ -41,22 +43,18 @@ const AddActivity = ({ routineId, activitiesList }) => {
       </select>
       <label for="count">Count:</label>
       <input
-        type="number"
+        type="text"
         id="countOption"
         name="count"
-        min="1"
-        max="99"
         onChange={(e) => {
           setCount(e.target.value);
         }}
       ></input>
       <label for="duration">Duration:</label>
       <input
-        type="number"
+        type="text"
         id="durationOption"
         name="duration"
-        min="1"
-        max="99"
         onChange={(e) => {
           setDuration(e.target.value);
         }}

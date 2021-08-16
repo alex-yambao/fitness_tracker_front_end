@@ -89,7 +89,7 @@ const MyRoutines = ({ currentUser, activitiesList, setActivities }) => {
             )}
             <p>Routine Goal: {goal}</p>
             <p>Creator Name: {creatorName}</p>
-            {activities ? (
+            {activities.length > 0 ? (
               <>
                 &nbsp;
                 <Button variant="primary" onClick={toggleConfirmDelete}>
@@ -103,30 +103,34 @@ const MyRoutines = ({ currentUser, activitiesList, setActivities }) => {
                   />
                 )}
                 {activities.map(
-                  ({ id, name, description, duration, count }) => (
-                    <div key={id} className="activities">
-                      <h3>Routine Activity: {name}</h3>
-                      <p>Activity Description: {description}</p>
-                      <p>Duration: {duration}</p>
-                      <p>Count: {count}</p>
-                      &nbsp;|&nbsp;{" "}
-                      <Button
-                        variant="primary"
-                        key={id}
-                        onClick={toggleConfirmDelete}
-                      >
-                        (-) Activity
-                      </Button>
-                      &nbsp;|&nbsp;{" "}
-                      <Button
-                        variant="primary"
-                        key={id}
-                        onClick={toggleConfirmDelete}
-                      >
-                        Update Activity
-                      </Button>
-                    </div>
-                  )
+                  ({ id, name, description, duration, count }) => {
+                    setRoutineActivity({ activity });
+
+                    return (
+                      <div key={id} className="activities">
+                        <h3>Routine Activity: {name}</h3>
+                        <p>Activity Description: {description}</p>
+                        <p>Duration: {duration}</p>
+                        <p>Count: {count}</p>
+                        &nbsp;|&nbsp;{" "}
+                        <Button
+                          variant="primary"
+                          key={id}
+                          onClick={toggleConfirmDelete}
+                        >
+                          (-) Activity
+                        </Button>
+                        &nbsp;|&nbsp;{" "}
+                        <Button
+                          variant="primary"
+                          key={id}
+                          onClick={toggleConfirmDelete}
+                        >
+                          Update Activity
+                        </Button>
+                      </div>
+                    );
+                  }
                 )}{" "}
               </>
             ) : (
@@ -135,7 +139,9 @@ const MyRoutines = ({ currentUser, activitiesList, setActivities }) => {
                 <Button variant="primary" onClick={toggleShowActivity}>
                   [+] Activity
                 </Button>
-                {showAddActivity && <AddActivity routineId={id} />}{" "}
+                {showAddActivity && (
+                  <AddActivity activitiesList={activitiesList} routineId={id} />
+                )}{" "}
                 <p>There are 0 Activities</p>{" "}
               </>
             )}

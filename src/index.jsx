@@ -63,7 +63,7 @@ const App = () => {
                 <Routines />
               </Route>
               <Route path="/activities">
-                <Activities />
+                <Activities activitiesList={activitiesList} />
               </Route>
               <Route exact path="/">
                 <h2 style={{ padding: ".5em" }}>
