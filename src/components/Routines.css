@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
+
+.Routines {
+  padding: 1em;
+  font-family: 'Libre Baskerville', serif;
+}
+
+.Routines h2 {
+  margin-bottom: .5em;
+  padding-bottom: .5em;
+  border-bottom: 1px solid grey;
+}
+
+.activities {
+  margin-bottom: 1em;
+  max-width: 40em;
+  
+}

@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/alex-yambao/fitness_trackr_front_end/static/css/main.118b84e3.chunk.css",
+    "main.js": "/alex-yambao/fitness_trackr_front_end/static/js/main.d0a14c59.chunk.js",
+    "main.js.map": "/alex-yambao/fitness_trackr_front_end/static/js/main.d0a14c59.chunk.js.map",
+    "runtime-main.js": "/alex-yambao/fitness_trackr_front_end/static/js/runtime-main.5524377d.js",
+    "runtime-main.js.map": "/alex-yambao/fitness_trackr_front_end/static/js/runtime-main.5524377d.js.map",
+    "static/js/2.b40a3c8f.chunk.js": "/alex-yambao/fitness_trackr_front_end/static/js/2.b40a3c8f.chunk.js",
+    "static/js/2.b40a3c8f.chunk.js.map": "/alex-yambao/fitness_trackr_front_end/static/js/2.b40a3c8f.chunk.js.map",
+    "index.html": "/alex-yambao/fitness_trackr_front_end/index.html",
+    "static/css/main.118b84e3.chunk.css.map": "/alex-yambao/fitness_trackr_front_end/static/css/main.118b84e3.chunk.css.map",
+    "static/js/2.b40a3c8f.chunk.js.LICENSE.txt": "/alex-yambao/fitness_trackr_front_end/static/js/2.b40a3c8f.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5524377d.js",
+    "static/js/2.b40a3c8f.chunk.js",
+    "static/css/main.118b84e3.chunk.css",
+    "static/js/main.d0a14c59.chunk.js"
+  ]
+}
