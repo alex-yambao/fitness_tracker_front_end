@@ -26,8 +26,8 @@ const Login = ({ handleClose, setCurrentUser }) => {
     try {
       const result = await loginUser(username, password);
       if (result.user) {
-      handleLogin(result);
-      setLoginMessage(result.message);
+        handleLogin(result);
+        setLoginMessage(result.message);
       }
     } catch (error) {
       setLoginMessage("Username or Password Invalid.");
@@ -37,7 +37,7 @@ const Login = ({ handleClose, setCurrentUser }) => {
   async function handleLogin(result) {
     await storeCurrentUser(result.user);
     await setCurrentUser(result.user);
-  };
+  }
 
   return (
     <div className="Login">

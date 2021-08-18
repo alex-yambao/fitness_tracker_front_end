@@ -8,7 +8,6 @@ const AddActivity = ({ routineId, activitiesList }) => {
   const [count, setCount] = useState("");
   const [duration, setDuration] = useState("");
 
-
   async function handleSubmit(e) {
     e.preventDefault();
     try {
@@ -16,9 +15,9 @@ const AddActivity = ({ routineId, activitiesList }) => {
         routineId,
         activityId,
         duration,
-        count,
+        count
       );
-      console.log(result)
+      console.log(result);
     } catch (error) {
       console.error(error);
     }

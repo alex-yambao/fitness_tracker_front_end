@@ -36,9 +36,10 @@ const UpdateRoutine = ({
         updatedRoutineGoal
       );
       setUpdateMessage("Routine updated successfully!");
-      setMyRoutinesList(
-        myRoutinesList.filter((routine) => routine.id !== routineId), result
-      )
+      setMyRoutinesList([
+        myRoutinesList.filter((routine) => routine.id !== routineId),
+        result,
+      ]);
     } catch (error) {
       setUpdateMessage("Routine update unsuccessful. Please try again");
     } finally {

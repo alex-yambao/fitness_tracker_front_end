@@ -3,8 +3,6 @@ import Button from "react-bootstrap/Button";
 import { getAllRoutinesByUser } from "../api";
 import CreateRoutine from "./CreateRoutine";
 import MyRoutinesCard from "./MyRoutinesCard";
-import UpdateRoutine from "./UpdateRoutine";
-import ConfirmDelete from "./ConfirmDelete";
 import AddActivity from "./AddActivity";
 import "./MyRoutines.css";
 
