@@ -6,7 +6,7 @@ import MyRoutinesCard from "./MyRoutinesCard";
 import AddActivity from "./AddActivity";
 import "./MyRoutines.css";
 
-const MyRoutines = ({ currentUser, activitiesList, setActivities }) => {
+const MyRoutines = ({ currentUser, activitiesList }) => {
   const [showCreateRoutine, setShowCreateRoutine] = useState(false);
   const [showUpdateRoutine, setShowUpdateRoutine] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
@@ -20,6 +20,23 @@ const MyRoutines = ({ currentUser, activitiesList, setActivities }) => {
       })
       .catch((error) => console.error(error));
   }, [currentUser]);
+
+  async function handleSetMyRoutinesList(result) {
+    setMyRoutinesList([...myRoutinesList, result]);
+  }
+
+  async function handleUpdateRoutine(result) {
+    setMyRoutinesList([
+      myRoutinesList.filter((routine) => routine.id !== result.id),
+      result,
+    ]);
+  }
+
+  async function handleDeleteRoutine(result) {
+    setMyRoutinesList(
+      myRoutinesList.filter((routine) => routine.id !== result.id)
+    );
+  }
 
   const toggleShowCreateRoutine = () => {
     setShowCreateRoutine(!showCreateRoutine);
@@ -47,8 +64,7 @@ const MyRoutines = ({ currentUser, activitiesList, setActivities }) => {
         {showCreateRoutine && (
           <CreateRoutine
             handleClose={toggleShowCreateRoutine}
-            setMyRoutinesList={setMyRoutinesList}
-            myRoutinesList={myRoutinesList}
+            handleSetMyRoutinesList={handleSetMyRoutinesList}
           />
         )}
       </h2>
@@ -58,11 +74,11 @@ const MyRoutines = ({ currentUser, activitiesList, setActivities }) => {
         return (
           <MyRoutinesCard
             toggleShowUpdateRoutine={toggleShowUpdateRoutine}
-            setMyRoutinesList={setMyRoutinesList}
             showUpdateRoutine={showUpdateRoutine}
-            myRoutinesList={myRoutinesList}
+            handleUpdateRoutine={handleUpdateRoutine}
             toggleConfirmDelete={toggleConfirmDelete}
             showConfirmDelete={showConfirmDelete}
+            handleDeleteRoutine={handleDeleteRoutine}
             id={id}
             name={name}
             goal={goal}

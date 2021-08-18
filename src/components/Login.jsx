@@ -5,7 +5,7 @@ import "./Login.css";
 import { loginUser } from "../api";
 import { storeCurrentUser } from "../auth";
 
-const Login = ({ handleClose, setCurrentUser }) => {
+const Login = ({ handleClose, handleLogin }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginMessage, setLoginMessage] = useState(null);
@@ -34,10 +34,6 @@ const Login = ({ handleClose, setCurrentUser }) => {
     }
   }
 
-  async function handleLogin(result) {
-    await storeCurrentUser(result.user);
-    await setCurrentUser(result.user);
-  }
 
   return (
     <div className="Login">

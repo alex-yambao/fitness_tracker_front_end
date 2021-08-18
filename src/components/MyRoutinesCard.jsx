@@ -6,10 +6,10 @@ import Button from "react-bootstrap/Button";
 const MyRoutinesCard = ({
   toggleShowUpdateRoutine,
   showUpdateRoutine,
-  setMyRoutinesList,
-  myRoutinesList,
+  handleUpdateRoutine,
   toggleConfirmDelete,
   showConfirmDelete,
+  handleDeleteRoutine,
   id,
   name,
   goal,
@@ -32,8 +32,7 @@ const MyRoutinesCard = ({
       {showUpdateRoutine && (
         <UpdateRoutine
           handleClose={toggleShowUpdateRoutine}
-          setMyRoutinesList={setMyRoutinesList}
-          myRoutinesList={myRoutinesList}
+          handleUpdateRoutine={handleUpdateRoutine}
           routineId={id}
           name={name}
           goal={goal}
@@ -46,10 +45,9 @@ const MyRoutinesCard = ({
       {showConfirmDelete && (
         <ConfirmDelete
           handleClose={toggleConfirmDelete}
-          setMyRoutinesList={setMyRoutinesList}
-          myRoutinesList={myRoutinesList}
+          handleDeleteRoutine={handleDeleteRoutine}
           routineId={id}
-          routinesListIndex={routinesListIndex}
+          RoutineIndex={RoutineIndex}
         />
       )}
       <p>Routine Goal: {goal}</p>

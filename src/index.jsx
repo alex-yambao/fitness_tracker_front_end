@@ -8,7 +8,7 @@ import {
   Redirect,
 } from "react-router-dom";
 
-import { getCurrentUser } from "./auth";
+import { getCurrentUser, clearCurrentUser, storeCurrentUser } from "./auth";
 import { getActivities } from "./api";
 import { Header, Routines, MyRoutines, Activities } from "./components";
 
@@ -25,10 +25,24 @@ const App = () => {
       });
   }, []);
 
+  const handleLogout = () => {
+    clearCurrentUser();
+    setCurrentUser("");
+  };
+
+  async function handleLogin({ user }) {
+    await storeCurrentUser(user);
+    await setCurrentUser(user);
+  }
+
   return (
     <Router>
       <div id="App">
-        <Header currentUser={currentUser} setCurrentUser={setCurrentUser} />
+        <Header
+          handleLogin={handleLogin}
+          handleLogout={handleLogout}
+          currentUser={currentUser}
+        />
         {currentUser ? (
           <>
             <Switch>
@@ -36,7 +50,6 @@ const App = () => {
                 <MyRoutines
                   currentUser={currentUser}
                   activitiesList={activitiesList}
-                  setActivities={setActivities}
                 />
               </Route>
               <Route path="/Routines">

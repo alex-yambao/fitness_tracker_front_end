@@ -1,18 +1,12 @@
 import React, { useState } from "react";
 import "./Header.css";
-import { clearCurrentUser } from "../auth";
 import { NavLink } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
 
-const Header = ({ currentUser, setCurrentUser }) => {
+const Header = ({ handleLogin, handleLogout, currentUser }) => {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
-
-  const handleLogout = () => {
-    clearCurrentUser();
-    setCurrentUser("");
-  };
 
   const toggleShowLogin = () => {
     setShowLogin(!showLogin);
@@ -64,8 +58,8 @@ const Header = ({ currentUser, setCurrentUser }) => {
             </button>
             {showRegister && (
               <Register
-                setCurrentUser={setCurrentUser}
                 handleClose={toggleShowRegister}
+                handleLogin={handleLogin}
               />
             )}
 
@@ -78,10 +72,7 @@ const Header = ({ currentUser, setCurrentUser }) => {
               LOG IN
             </button>
             {showLogin && (
-              <Login
-                setCurrentUser={setCurrentUser}
-                handleClose={toggleShowLogin}
-              />
+              <Login handleClose={toggleShowLogin} handleLogin={handleLogin} />
             )}
           </>
         )}

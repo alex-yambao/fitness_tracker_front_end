@@ -4,14 +4,7 @@ import Button from "react-bootstrap/Button";
 import "./UpdateRoutine.css";
 import { updateRoutine } from "../api";
 
-const UpdateRoutine = ({
-  handleClose,
-  setMyRoutinesList,
-  myRoutinesList,
-  routineId,
-  goal,
-  name,
-}) => {
+const UpdateRoutine = ({ handleClose, handleUpdateRoutine, routineId, goal, name }) => {
   const [updateMessage, setUpdateMessage] = useState(null);
   const [updatedRoutineName, setUpdatedRoutineName] = useState("");
   const [updatedRoutineGoal, setUpdatedRoutineGoal] = useState("");
@@ -35,12 +28,10 @@ const UpdateRoutine = ({
         updatedRoutineName,
         updatedRoutineGoal
       );
+      await handleUpdateRoutine(result);
       setUpdateMessage("Routine updated successfully!");
-      setMyRoutinesList([
-        myRoutinesList.filter((routine) => routine.id !== routineId),
-        result,
-      ]);
     } catch (error) {
+      console.error(error)
       setUpdateMessage("Routine update unsuccessful. Please try again");
     } finally {
       reset();

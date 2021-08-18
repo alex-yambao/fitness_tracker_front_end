@@ -3,9 +3,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Register.css";
 import { registerUser } from "../api";
-import { storeCurrentUser } from "../auth";
 
-const Register = ({ handleClose, setCurrentUser }) => {
+const Register = ({ handleClose, handleLogin }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [registerMessage, setRegisterMessage] = useState(null);
@@ -20,18 +19,15 @@ const Register = ({ handleClose, setCurrentUser }) => {
     return username.length > 0 && password.length > 0;
   }
 
-  async function handleSubmit(event) {
-    event.preventDefault();
+  async function handleSubmit(e) {
+    e.preventDefault();
     setRegisterMessage(null);
     try {
       const result = await registerUser(username, password);
-      storeCurrentUser(result.user);
-      setCurrentUser(result.user);
+      await handleLogin(result);
       setRegisterMessage(result.message);
     } catch (error) {
-      setRegisterMessage(
-        "Registration unsuccessful. Duplicate Username, please choose another."
-      );
+      setRegisterMessage("Registration Unsuccessful");
     }
   }
 

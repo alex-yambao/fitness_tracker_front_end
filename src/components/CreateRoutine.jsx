@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import "./CreateRoutine.css";
 import { createNewRoutine } from "../api";
 
-const CreateRoutine = ({ handleClose, setMyRoutinesList, myRoutinesList }) => {
+const CreateRoutine = ({ handleClose, handleSetMyRoutinesList }) => {
   const [creationMessage, setCreationMessage] = useState(null);
   const [newRoutineName, setNewRoutineName] = useState("");
   const [newRoutineGoal, setNewRoutineGoal] = useState("");
@@ -29,7 +29,8 @@ const CreateRoutine = ({ handleClose, setMyRoutinesList, myRoutinesList }) => {
         goal: newRoutineGoal,
         isPublic: isPublic,
       });
-      setMyRoutinesList([...myRoutinesList, result]);
+      console.log(result)
+      await handleSetMyRoutinesList(result);
       setCreationMessage("Routine created successfully!");
     } catch (error) {
       setCreationMessage("Routine creation unsuccessful. Please try again");

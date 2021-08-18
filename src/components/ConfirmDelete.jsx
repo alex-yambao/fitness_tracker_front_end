@@ -6,9 +6,8 @@ import { deleteRoutine } from "../api";
 
 const ConfirmDelete = ({
   handleClose,
+  handleDeleteRoutine,
   routineId,
-  setMyRoutinesList,
-  myRoutinesList,
   routineListIndex,
 }) => {
   const [deletionMessage, setDeletionMessage] = useState(null);
@@ -30,12 +29,11 @@ const ConfirmDelete = ({
     try {
       const result = await deleteRoutine(routineId);
       if (result) {
-        setMyRoutinesList(
-          myRoutinesList.filter((routine) => routine.id !== routineId)
-        );
+        await handleDeleteRoutine(result);
         setDeletionMessage("Routine deleted successfully!");
       }
     } catch (error) {
+      console.log(error)
       setDeletionMessage("Routine deletion unsuccessful. Please try again");
     }
   }

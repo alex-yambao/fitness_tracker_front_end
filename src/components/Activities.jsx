@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Activities.css";
 
-const Activities = ({ activitiesList, setActivities }) => {
+const Activities = ({ activitiesList }) => {
   return (
     <div className="activities">
       <h2>Here are all activities</h2>
