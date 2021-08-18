@@ -29,7 +29,6 @@ const CreateRoutine = ({ handleClose, handleSetMyRoutinesList }) => {
         goal: newRoutineGoal,
         isPublic: isPublic,
       });
-      console.log(result)
       await handleSetMyRoutinesList(result);
       setCreationMessage("Routine created successfully!");
     } catch (error) {

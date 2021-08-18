@@ -54,23 +54,22 @@ const MyRoutinesCard = ({
       <p>Creator Name: {creatorName}</p>
       {activities.length > 0 ? (
         <>
-          &nbsp;
-          <Button variant="primary" onClick={toggleConfirmDelete}>
-            [+] Activity
-          </Button>
-          {showAddActivity && (
-            <AddActivity
-              handleClose={toggleConfirmDelete}
-              routineId={id}
-              activitiesList={activitiesList}
-            />
-          )}
           {activities.map((activity, ActivityIndex) => {
             const { id, name, description, duration, count } = activity;
             setRoutineActivity({ activity });
-
             return (
               <div key={ActivityIndex} className="activities">
+                &nbsp;
+                <Button variant="primary" onClick={toggleConfirmDelete}>
+                  [+] Activity
+                </Button>
+                {showAddActivity && (
+                  <AddActivity
+                    handleClose={toggleConfirmDelete}
+                    routineId={id}
+                    activitiesList={activitiesList}
+                  />
+                )}
                 <h3>Routine Activity: {name}</h3>
                 <p>Activity Description: {description}</p>
                 <p>Duration: {duration}</p>
