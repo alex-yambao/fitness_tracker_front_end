@@ -23,22 +23,26 @@ const UpdateRoutine = ({
   );
 
   function validateForm() {
-    return !updatedRoutineName.length > 0 && !updatedRoutineGoal.length > 0;
+    return updatedRoutineName.length > 0 && updatedRoutineGoal.length > 0;
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
     setUpdateMessage(null);
     try {
-      const result = await updateRoutine({
-        routineId: routineId,
-        name: updatedRoutineName,
-        goal: updatedRoutineGoal,
-      });
-      setMyRoutinesList(myRoutinesList);
+      const result = await updateRoutine(
+        routineId,
+        updatedRoutineName,
+        updatedRoutineGoal
+      );
       setUpdateMessage("Routine updated successfully!");
+      setMyRoutinesList(
+        myRoutinesList.filter((routine) => routine.id !== routineId), result
+      )
     } catch (error) {
       setUpdateMessage("Routine update unsuccessful. Please try again");
+    } finally {
+      reset();
     }
   }
 
@@ -60,7 +64,7 @@ const UpdateRoutine = ({
             autoFocus
             type="text"
             name="name"
-            value={name}
+            placeholder={name}
             onChange={(e) => setUpdatedRoutineName(e.target.value)}
           />
         </Form.Group>
@@ -69,7 +73,7 @@ const UpdateRoutine = ({
           <Form.Control
             type="text"
             name="goal"
-            value={goal}
+            placeholder={goal}
             onChange={(e) => setUpdatedRoutineGoal(e.target.value)}
           />
         </Form.Group>

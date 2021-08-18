@@ -202,6 +202,7 @@ export const updateRoutine = async (routineId, name, goal) => {
       body: JSON.stringify({
         name: name,
         goal: goal,
+        isPublic: true,
       }),
     });
     const data = await response.json();
