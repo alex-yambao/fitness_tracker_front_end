@@ -16,3 +16,8 @@
   max-width: 40em;
   border: solid black 1px;
 }
+
+.activities button {
+  margin-left: 0.5em;
+  margin-bottom: 0.5em;
+}

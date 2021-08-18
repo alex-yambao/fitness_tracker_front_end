@@ -30,6 +30,10 @@ const App = () => {
     setCurrentUser("");
   };
 
+  async function handleSetActivitiesList(result) {
+    setActivities([...activitiesList, result]);
+  }
+
   async function handleLogin({ user }) {
     await storeCurrentUser(user);
     await setCurrentUser(user);
@@ -57,8 +61,9 @@ const App = () => {
               </Route>
               <Route path="/activities">
                 <Activities
+                  handleSetActivitiesList={handleSetActivitiesList}
                   activitiesList={activitiesList}
-                  setActivities={setActivities}
+                  currentUser={currentUser}
                 />
               </Route>
               <Route exact path="/">

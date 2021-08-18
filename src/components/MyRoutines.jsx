@@ -3,14 +3,14 @@ import Button from "react-bootstrap/Button";
 import { getAllRoutinesByUser } from "../api";
 import CreateRoutine from "./CreateRoutine";
 import MyRoutinesCard from "./MyRoutinesCard";
-import AddActivity from "./AddActivity";
+import AddRoutineActivity from "./AddRoutineActivity";
 import "./MyRoutines.css";
 
 const MyRoutines = ({ currentUser, activitiesList }) => {
   const [showCreateRoutine, setShowCreateRoutine] = useState(false);
   const [showUpdateRoutine, setShowUpdateRoutine] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
-  const [showAddActivity, setShowAddActivity] = useState(false);
+  const [showAddRoutineActivity, setShowAddRoutineActivity] = useState(false);
   const [myRoutinesList, setMyRoutinesList] = useState([]);
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const MyRoutines = ({ currentUser, activitiesList }) => {
   };
 
   const toggleShowActivity = () => {
-    setShowAddActivity(!showAddActivity);
+    setShowAddRoutineActivity(!showAddRoutineActivity);
   };
 
   return (
@@ -86,9 +86,9 @@ const MyRoutines = ({ currentUser, activitiesList }) => {
             activities={activities}
             RoutineIndex={RoutineIndex}
             activitiesList={activitiesList}
-            setShowAddActivity={setShowAddActivity}
-            showAddActivity={showAddActivity}
-            AddActivity={AddActivity}
+            setShowAddRoutineActivity={setShowAddRoutineActivity}
+            showAddRoutineActivity={showAddRoutineActivity}
+            AddRoutineActivity={AddRoutineActivity}
             toggleShowActivity={toggleShowActivity}
           />
         );

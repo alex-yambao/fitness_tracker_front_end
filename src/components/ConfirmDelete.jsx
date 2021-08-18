@@ -8,7 +8,6 @@ const ConfirmDelete = ({
   handleClose,
   handleDeleteRoutine,
   routineId,
-  routineListIndex,
 }) => {
   const [deletionMessage, setDeletionMessage] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -33,7 +32,7 @@ const ConfirmDelete = ({
         setDeletionMessage("Routine deleted successfully!");
       }
     } catch (error) {
-      console.log(error)
+      console.error(error)
       setDeletionMessage("Routine deletion unsuccessful. Please try again");
     }
   }

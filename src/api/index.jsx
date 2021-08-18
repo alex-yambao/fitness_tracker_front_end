@@ -88,9 +88,9 @@ export const getActivities = async () => {
 };
 
 //POST /activities
-export const createActivity = async () => {
+export const createActivity = async (name, description) => {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token").replace(/['"]+/g, "");
     if (!token) return;
     const response = await fetch(`${BASE_URL}/activities`, {
       method: "POST",
@@ -113,7 +113,7 @@ export const createActivity = async () => {
 //PATCH /:activityId
 export const updateActivity = async (activityID, name, description) => {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token").replace(/['"]+/g, "");
     if (!token) return;
     const response = await fetch(`${BASE_URL}/activities/${activityID}`, {
       method: "PATCH",
@@ -165,7 +165,7 @@ export const getAllPublicRoutines = async () => {
 
 //POST /routines
 export const createNewRoutine = async ({ name, goal, isPublic }) => {
-  const token = JSON.parse(localStorage.getItem("token")).replace(/['"]+/g, "");
+  const token = localStorage.getItem("token").replace(/['"]+/g, "");
   try {
     const response = await fetch(`${BASE_URL}/routines`, {
       method: "POST",
