@@ -4,10 +4,10 @@ import Button from "react-bootstrap/Button";
 import "./CreateRoutine.css";
 import { createActivity } from "../api";
 
-const AddActivity = ({ handleClose, handleSetActivitiesList }) => {
+const AddRoutineActivity = ({ handleClose, handleSetActivitiesList }) => {
   const [addMessage, setAddMessage] = useState(null);
-  const [addActivityName, setAddActivityName] = useState("");
-  const [activityDescription, setAddActivityDescription] = useState("");
+  const [addRoutineActivityName, setAddRoutineActivityName] = useState("");
+  const [activityDescription, setAddRoutineActivityDescription] = useState("");
 
   const messageDiv = addMessage ? (
     <div className="message">{addMessage}</div>
@@ -16,14 +16,14 @@ const AddActivity = ({ handleClose, handleSetActivitiesList }) => {
   );
 
   function validateForm() {
-    return addActivityName.length > 0 && activityDescription.length > 0;
+    return addRoutineActivityName.length > 0 && activityDescription.length > 0;
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
     setAddMessage(null);
     try {
-      const result = await createActivity(addActivityName, activityDescription);
+      const result = await createActivity(addRoutineActivityName, activityDescription);
       await handleSetActivitiesList(result);
       setAddMessage("Activity created successfully!");
     } catch (error) {
@@ -34,8 +34,8 @@ const AddActivity = ({ handleClose, handleSetActivitiesList }) => {
   }
 
   function reset() {
-    setAddActivityName("");
-    setAddActivityDescription("");
+    setAddRoutineActivityName("");
+    setAddRoutineActivityDescription("");
   }
 
   return (
@@ -51,7 +51,7 @@ const AddActivity = ({ handleClose, handleSetActivitiesList }) => {
             autoFocus
             type="text"
             name="name"
-            onChange={(e) => setAddActivityName(e.target.value)}
+            onChange={(e) => setAddRoutineActivityName(e.target.value)}
           />
         </Form.Group>
         <Form.Group size="lg" controlId="routineGoal">
@@ -59,7 +59,7 @@ const AddActivity = ({ handleClose, handleSetActivitiesList }) => {
           <Form.Control
             type="text"
             name="goal"
-            onChange={(e) => setAddActivityDescription(e.target.value)}
+            onChange={(e) => setAddRoutineActivityDescription(e.target.value)}
           />
         </Form.Group>
         {messageDiv}
@@ -71,4 +71,4 @@ const AddActivity = ({ handleClose, handleSetActivitiesList }) => {
   );
 };
 
-export default AddActivity;
+export default AddRoutineActivity;

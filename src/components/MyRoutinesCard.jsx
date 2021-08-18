@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ConfirmDelete from "./ConfirmDelete";
 import UpdateRoutine from "./UpdateRoutine";
 import Button from "react-bootstrap/Button";
+import AddRoutineActivity from "./AddRoutineActivity";
 
 const MyRoutinesCard = ({
   toggleShowUpdateRoutine,
@@ -18,8 +19,8 @@ const MyRoutinesCard = ({
   activities,
   activitiesList,
   toggleShowActivity,
-  showAddActivity,
-  AddActivity,
+  showAddRoutineActivity,
+  addRoutineActivity,
 }) => {
   const { RoutineActivityList, setRoutineActivity } = useState("");
 
@@ -63,8 +64,8 @@ const MyRoutinesCard = ({
                 <Button variant="primary" onClick={toggleConfirmDelete}>
                   [+] Activity
                 </Button>
-                {showAddActivity && (
-                  <AddActivity
+                {showAddRoutineActivity && (
+                  <AddRoutineActivity
                     handleClose={toggleConfirmDelete}
                     routineId={id}
                     activitiesList={activitiesList}
@@ -100,8 +101,8 @@ const MyRoutinesCard = ({
           <Button variant="primary" onClick={toggleShowActivity}>
             [+] Activity
           </Button>
-          {showAddActivity && (
-            <AddActivity activitiesList={activitiesList} routineId={id} />
+          {showAddRoutineActivity && (
+            <AddRoutineActivity activitiesList={activitiesList} routineId={id} />
           )}{" "}
           <p>There are 0 Activities</p>{" "}
         </>
