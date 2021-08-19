@@ -14,7 +14,7 @@ const Routines = () => {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, publicRoutines);
 
   return (
     <div className="Routines">

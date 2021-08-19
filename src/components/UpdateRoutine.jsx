@@ -31,7 +31,6 @@ const UpdateRoutine = ({ handleClose, handleUpdateRoutine, routineId, goal, name
       await handleUpdateRoutine(result);
       setUpdateMessage("Routine updated successfully!");
     } catch (error) {
-      console.error(error)
       setUpdateMessage("Routine update unsuccessful. Please try again");
     } finally {
       reset();

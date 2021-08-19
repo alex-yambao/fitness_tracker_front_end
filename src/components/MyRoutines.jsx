@@ -19,7 +19,7 @@ const MyRoutines = ({ currentUser, activitiesList }) => {
         setMyRoutinesList(routines);
       })
       .catch((error) => console.error(error));
-  }, [currentUser]);
+  }, myRoutinesList);
 
   async function handleSetMyRoutinesList(result) {
     setMyRoutinesList([...myRoutinesList, result]);

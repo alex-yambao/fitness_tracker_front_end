@@ -53,7 +53,7 @@ const MyRoutinesCard = ({
       )}
       <p>Routine Goal: {goal}</p>
       <p>Creator Name: {creatorName}</p>
-      {activities.length > 0 ? (
+      {activities && activities.length > 0 ? (
         <>
           {activities.map((activity, ActivityIndex) => {
             const { id, name, description, duration, count } = activity;
