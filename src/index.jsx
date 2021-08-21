@@ -23,7 +23,7 @@ const App = () => {
       .catch((error) => {
         console.error(error);
       });
-  }, activitiesList);
+  }, []);
 
   const handleLogout = () => {
     clearCurrentUser();

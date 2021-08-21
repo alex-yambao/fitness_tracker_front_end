@@ -12,14 +12,17 @@ const MyRoutines = ({ currentUser, activitiesList }) => {
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [showAddRoutineActivity, setShowAddRoutineActivity] = useState(false);
   const [myRoutinesList, setMyRoutinesList] = useState([]);
+  const [showConfirmDeleteActivity, setConfirmDeleteActivity] = useState(false)
+  const [showUpdateRoutineActivity, setShowUpdateRoutineActivity] = useState(false)
 
+  showConfirmDeleteActivity
   useEffect(() => {
     getAllRoutinesByUser(currentUser.username)
-      .then((routines) => {
-        setMyRoutinesList(routines);
+      .then( async (routines) => {
+       setMyRoutinesList(routines);
       })
       .catch((error) => console.error(error));
-  }, myRoutinesList);
+  }, []);
 
   async function handleSetMyRoutinesList(result) {
     setMyRoutinesList([...myRoutinesList, result]);
@@ -50,9 +53,17 @@ const MyRoutines = ({ currentUser, activitiesList }) => {
     setShowConfirmDelete(!showConfirmDelete);
   };
 
-  const toggleShowActivity = () => {
+  const toggleShowAddActivity = () => {
     setShowAddRoutineActivity(!showAddRoutineActivity);
   };
+
+  function toggleConfirmDeleteActivity() {
+    setConfirmDeleteActivity(!showConfirmDeleteActivity);
+  }
+
+  function toggleShowUpdateRoutineActivity() {
+    setShowUpdateRoutineActivity(!showUpdateRoutineActivity);
+  }
 
   return (
     <div className="routines">
@@ -86,10 +97,13 @@ const MyRoutines = ({ currentUser, activitiesList }) => {
             activities={activities}
             RoutineIndex={RoutineIndex}
             activitiesList={activitiesList}
-            setShowAddRoutineActivity={setShowAddRoutineActivity}
             showAddRoutineActivity={showAddRoutineActivity}
             AddRoutineActivity={AddRoutineActivity}
-            toggleShowActivity={toggleShowActivity}
+            toggleShowAddActivity={toggleShowAddActivity}
+            toggleConfirmDeleteActivity={toggleConfirmDeleteActivity}
+            showConfirmDeleteActivity={showConfirmDeleteActivity}
+            toggleShowUpdateRoutineActivity={toggleShowUpdateRoutineActivity}
+            showUpdateRoutineActivity={showUpdateRoutineActivity}
           />
         );
       })}

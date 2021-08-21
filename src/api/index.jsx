@@ -180,6 +180,7 @@ export const createNewRoutine = async ({ name, goal, isPublic }) => {
       }),
     });
     const data = await response.json();
+
     return data;
   } catch (error) {
     throw error;
@@ -231,18 +232,22 @@ export const deleteRoutine = async (routineId) => {
 };
 
 // POST /routines/:routineId/activities
-export const addActivityToRoutine = async (
+export const addActivityToRoutine = async ({
   routineId,
   activityId,
   duration,
-  count
-) => {
+  count,
+}) => {
   try {
     const response = await fetch(
       `${BASE_URL}/routines/${routineId}/activities`,
       {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
+          routineId: routineId,
           activityId: activityId,
           duration: duration,
           count: count,
@@ -263,7 +268,7 @@ export const updateRoutineActivity = async (
   duration
 ) => {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token").replace(/['"]+/g, "");
     if (!token) return;
     const response = await fetch(
       `${BASE_URL}/routine_activities/${routineActivityId}`,
@@ -274,6 +279,7 @@ export const updateRoutineActivity = async (
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
+          routineActivityId: routineActivityId,
           count: count,
           duration: duration,
         }),
@@ -289,7 +295,7 @@ export const updateRoutineActivity = async (
 //DELETE /routine_activities/:routineActivityId
 export const deleteRoutineActivity = async (routineActivityId) => {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token").replace(/['"]+/g, "");
     if (!token) return;
     const response = await fetch(
       `${BASE_URL}/routine_activities/${routineActivityId}`,

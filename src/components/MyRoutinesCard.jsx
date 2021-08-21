@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ConfirmDelete from "./ConfirmDelete";
 import UpdateRoutine from "./UpdateRoutine";
 import Button from "react-bootstrap/Button";
 import AddRoutineActivity from "./AddRoutineActivity";
+import ConfirmDeleteActivity from "./ConfirmDeleteActivity";
+import UpdateRoutineActivity from "./UpdateRoutineActivity";
 
 const MyRoutinesCard = ({
   toggleShowUpdateRoutine,
@@ -18,12 +20,13 @@ const MyRoutinesCard = ({
   RoutineIndex,
   activities,
   activitiesList,
-  toggleShowActivity,
+  toggleShowAddActivity,
   showAddRoutineActivity,
-  addRoutineActivity,
+  toggleConfirmDeleteActivity,
+  showConfirmDeleteActivity,
+  toggleShowUpdateRoutineActivity,
+  showUpdateRoutineActivity
 }) => {
-  const { RoutineActivityList, setRoutineActivity } = useState("");
-
   return (
     <div key={RoutineIndex} className="post">
       <h3>Routine Name: {name} </h3> &nbsp;
@@ -56,17 +59,16 @@ const MyRoutinesCard = ({
       {activities && activities.length > 0 ? (
         <>
           {activities.map((activity, ActivityIndex) => {
-            const { id, name, description, duration, count } = activity;
-            setRoutineActivity({ activity });
+            const { id, name, description, duration, count, routineActivityId } = activity;
             return (
               <div key={ActivityIndex} className="activities">
                 &nbsp;
-                <Button variant="primary" onClick={toggleConfirmDelete}>
+                <Button variant="primary" onClick={toggleShowAddActivity}>
                   [+] Activity
                 </Button>
                 {showAddRoutineActivity && (
                   <AddRoutineActivity
-                    handleClose={toggleConfirmDelete}
+                    handleClose={toggleShowAddActivity}
                     routineId={id}
                     activitiesList={activitiesList}
                   />
@@ -76,21 +78,32 @@ const MyRoutinesCard = ({
                 <p>Duration: {duration}</p>
                 <p>Count: {count}</p>
                 &nbsp;|&nbsp;{" "}
-                <Button
-                  variant="primary"
-                  key={id}
-                  onClick={toggleConfirmDelete}
-                >
+                <Button variant="primary" onClick={toggleConfirmDeleteActivity}>
                   (-) Activity
                 </Button>
-                &nbsp;|&nbsp;{" "}
+                {showConfirmDeleteActivity && (
+                  <ConfirmDeleteActivity
+                    handleClose={toggleConfirmDeleteActivity}
+                    handleDeleteRoutine={handleDeleteRoutine}
+                    routineActivityId={routineActivityId}
+                  />
+                )}
+                &nbsp;|&nbsp;
                 <Button
                   variant="primary"
                   key={id}
-                  onClick={toggleConfirmDelete}
+                  onClick={toggleShowUpdateRoutineActivity}
                 >
                   Update Activity
                 </Button>
+                {showUpdateRoutineActivity && (
+                  <UpdateRoutineActivity
+                    handleClose={toggleShowUpdateRoutineActivity}
+                    count={count}
+                    duration={duration}
+                    routineActivityId={routineActivityId}
+                  />
+                )}
               </div>
             );
           })}{" "}
@@ -98,12 +111,16 @@ const MyRoutinesCard = ({
       ) : (
         <>
           &nbsp;
-          <Button variant="primary" onClick={toggleShowActivity}>
+          <Button variant="primary" onClick={toggleShowAddActivity}>
             [+] Activity
           </Button>
           {showAddRoutineActivity && (
-            <AddRoutineActivity activitiesList={activitiesList} routineId={id} />
-          )}{" "}
+            <AddRoutineActivity
+              handleClose={toggleShowAddActivity}
+              activitiesList={activitiesList}
+              routineId={id}
+            />
+          )}
           <p>There are 0 Activities</p>{" "}
         </>
       )}
